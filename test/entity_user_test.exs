@@ -16,13 +16,17 @@ defmodule CreditCardLedger.Entity.UserTest do
     }
 
     changeset = User.changeset(%User{}, params)
+    # changeset2 = User.cast(params)
     # 2. Insere (usamos _user com underscore pois não vamos ler essa variável agora)
     {:ok, _user} = Repo.insert(changeset)
+    # tambem funciona, mas vou deixar so o mais bonito
+    # {:ok, _user} = Repo.insert(changeset2)
 
     users = Repo.all(User)
 
     # pattern match dizendo que é uma lista de uma estrturua de dados chamada user
     assert [%User{fullname: "Some Body"}] = users
+    # assert [%User{}] = users
 
   end
 end
