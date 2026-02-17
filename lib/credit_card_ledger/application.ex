@@ -3,12 +3,17 @@ defmodule CreditCardLedger.Application do
   # for more information on OTP Applications
   @moduledoc false
 
+  require Logger
   use Application
+
+  @http_port 8080
 
   @impl true
   def start(_type, _args) do
+    Logger.info("Starting http server at port #${@http_port}")
     children = [
-      CreditCardLedger.Repo
+      CreditCardLedger.Repo,
+      {Plug.Cowboy, scheme: :http, plug: CreditCardLedgerHttp.Router, options: [port: @http_port]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
