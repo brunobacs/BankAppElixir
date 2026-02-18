@@ -16,8 +16,9 @@ defmodule CreditCardLedger.Entity.Transaction do
     %__MODULE__{inserted_at: now}
     |> cast(params, [:amount])
     |> validate_required([:amount])
-    |> put_assoc(:user, user)
-    |> apply_changes()
+    |> put_change(:user_id, user.id) #funciona melhor
+    # |> put_assoc(:user, user)
+    # |> apply_changes()
   end
 
 end

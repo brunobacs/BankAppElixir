@@ -19,8 +19,9 @@ defmodule CreditCardLedger.Entity.User do
   # outra forma de fazer o changeset
   def cast(params) do
     now = NaiveDateTime.truncate(NaiveDateTime.utc_now(), :second)
+
     %__MODULE__{inserted_at: now}
-    |> cast(params, [:fullname]) # vai verificar se é string
+    |> cast(params, [:fullname, :credit_limit]) # precisa colocar o credti_limit na entrada pra poder criar o limite corretamente
     |> validate_required([:fullname, :credit_limit]) # nao pode ser nula, tem que testar aqui
     |> apply_changes()
   end
