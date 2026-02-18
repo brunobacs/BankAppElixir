@@ -15,10 +15,11 @@ defmodule CreditCardLedger.Entity.UserTest do
       fullname: "Some Body"
     }
 
-    changeset = User.changeset(%User{}, params)
-    # changeset2 = User.cast(params)
+    # changeset = User.changeset(%User{}, params)
+
+    changeset2 = User.cast(params)
     # 2. Insere (usamos _user com underscore pois não vamos ler essa variável agora)
-    {:ok, _user} = Repo.insert(changeset)
+    {:ok, _user} = Repo.insert(changeset2)
     # tambem funciona, mas vou deixar so o mais bonito
     # {:ok, _user} = Repo.insert(changeset2)
 
