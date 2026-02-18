@@ -13,7 +13,8 @@ defmodule CreditCardLedger.Application do
     Logger.info("Starting http server at port #${@http_port}")
     children = [
       CreditCardLedger.Repo,
-      {Plug.Cowboy, scheme: :http, plug: CreditCardLedgerHttp.Router, options: [port: @http_port]}
+      {Plug.Cowboy, scheme: :http, plug: CreditCardLedgerHttp.Router, options: [port: @http_port]},
+      CreditCardLedger.SafeTransaction,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
