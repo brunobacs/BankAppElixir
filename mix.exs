@@ -23,6 +23,7 @@ defmodule CreditCardLedger.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:decimal, "~> 2.3"},
       {:credo, "~> 1.7"},
       {:plug_cowboy, "~> 2.8"},
       {:ecto_sql, "~> 3.13"},

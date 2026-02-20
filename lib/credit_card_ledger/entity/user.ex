@@ -6,7 +6,7 @@ defmodule CreditCardLedger.Entity.User do
 
   schema "users" do
     field :fullname, :string
-    field :credit_limit, :float
+    field :credit_limit, :decimal
     field :inserted_at, :naive_datetime
   end
 

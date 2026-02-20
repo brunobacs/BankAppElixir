@@ -6,10 +6,20 @@ defmodule CreditCardLedger.Transaction do
   import Ecto.Query
 
   def add_transaction(user_id, amount) do
-
+    amount_dec = Decimal.cast(amount)
     # carregar todas as transacoes
     with user = %User{} <- Repo.get(User, user_id),
       used_limit <- get_available_limit(user) do
+
+        # Soma: Decimal.add(usado, atual)
+        total_pretendido = Decimal.add(used_limit, amount_dec)
+
+
+        if Decimal.compare(total_pretendido, user.credit_limit) != :gt do
+          Transaction.cast(%{amount: amount_dec}, user) |> Repo.insert()
+        else
+          {:error, :insufficient_limit}
+        end
 
         case used_limit + amount <= user.credit_limit do
           #fazer a transacao

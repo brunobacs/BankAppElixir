@@ -6,7 +6,7 @@ defmodule CreditCardLedger.Entity.Transaction do
   @foreign_key_type :binary_id
 
   schema "transactions" do
-    field :amount, :float
+    field :amount, :decimal
     belongs_to(:user, CreditCardLedger.Entity.User)
     field :inserted_at, :naive_datetime
   end
